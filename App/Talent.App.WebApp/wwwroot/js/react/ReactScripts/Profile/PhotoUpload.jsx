@@ -15,6 +15,7 @@ export default class PhotoUpload extends Component {
 
     render() {
 
+       return (<p>skill</p>);
         
     }
 }

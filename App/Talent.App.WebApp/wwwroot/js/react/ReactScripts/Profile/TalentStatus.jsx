@@ -11,5 +11,6 @@ export default class TalentStatus extends React.Component {
     
     render() {
         
+       return (<p>skill</p>);
     }
 }

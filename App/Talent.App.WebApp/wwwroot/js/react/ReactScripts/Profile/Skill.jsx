@@ -10,6 +10,7 @@ export default class Skill extends React.Component {
 
   
    render() {
+       return (<p>skill</p>);
         
     }
 }

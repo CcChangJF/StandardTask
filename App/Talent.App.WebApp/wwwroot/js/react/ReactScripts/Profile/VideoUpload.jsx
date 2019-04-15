@@ -16,5 +16,6 @@ export default class VideoUpload extends React.Component {
 
     render() {
         
+       return (<p>skill</p>);
     }
 }

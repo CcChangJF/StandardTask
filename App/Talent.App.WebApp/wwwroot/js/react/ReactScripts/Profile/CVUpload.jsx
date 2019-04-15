@@ -11,6 +11,7 @@ export default class CVUpload extends React.Component {
     }
 
     render() {
+       return (<p>skill</p>);
 
     }
    

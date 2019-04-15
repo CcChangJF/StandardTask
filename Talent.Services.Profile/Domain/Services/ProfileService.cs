@@ -51,13 +51,111 @@ namespace Talent.Services.Profile.Domain.Services
 
         public async Task<TalentProfileViewModel> GetTalentProfile(string Id)
         {
-            //Your code here;
-            throw new NotImplementedException();
+            User talent = (await _userRepository.Get(x => x.Id == Id)).FirstOrDefault();
+            var videoUrl = string.IsNullOrWhiteSpace(talent.VideoName)
+                          ? ""
+                          : await _fileService.GetFileURL(talent.VideoName, FileType.UserVideo);
+            var cvUrl = string.IsNullOrWhiteSpace(talent.CvName)
+                        ? ""
+                        : await _fileService.GetFileURL(talent.CvName, FileType.UserCV);
+            var languages = talent.Languages.Select(x => ViewModelFromLanguage(x)).ToList();
+            var skills = talent.Skills.Select(x => ViewModelFromSkill(x)).ToList();
+            var education = talent.Education.Select(x => ViewModelFromEducation(x)).ToList();
+            var certifications = talent.Certifications.Select(
+                x => ViewModelFromCertification(x)).ToList();
+            var experience = talent.Experience.Select(x => ViewModelFromExperience(x)).ToList();
+
+            var result = new TalentProfileViewModel
+            {
+                Id = talent.Id,
+                FirstName = talent.FirstName,
+                MiddleName = talent.MiddleName,
+                LastName = talent.LastName,
+                Gender = talent.Gender,
+
+                Email = talent.Email,
+                Phone = talent.Phone,
+                MobilePhone = talent.MobilePhone,
+                IsMobilePhoneVerified = talent.IsMobilePhoneVerified,
+
+                Address = talent.Address,
+                Nationality = talent.Nationality,
+                VisaStatus = talent.VisaStatus,
+                VisaExpiryDate = talent.VisaExpiryDate,
+                ProfilePhoto = talent.ProfilePhoto,
+                ProfilePhotoUrl = talent.ProfilePhotoUrl,
+
+                VideoName = talent.VideoName,
+                VideoUrl = videoUrl,
+                CvName = talent.CvName,
+                CvUrl = cvUrl,
+
+                Summary = talent.Summary,
+                Description = talent.Description,
+                LinkedAccounts = talent.LinkedAccounts,
+                JobSeekingStatus = talent.JobSeekingStatus,
+
+                Languages = languages,
+                Skills = skills,
+                Education = education,
+                Certifications = certifications,
+                Experience = experience
+            };
+            return result;
         }
 
-        public async Task<bool> UpdateTalentProfile(TalentProfileViewModel model, string updaterId)
+        public async Task<bool> UpdateTalentProfile(TalentProfileViewModel talent, string updaterId)
         {
-            //Your code here;
+            //try
+            //{
+            //    if (null != talent.Id)
+            //    {
+            //        User existingTalent = (await _userRepository.GetByIdAsync(talent.Id));
+            //        existingTalent.FirstName = talent.FirstName;
+            //        existingTalent.MiddleName = talent.MiddleName;
+            //        existingTalent.LastName = talent.LastName;
+            //        existingTalent.Gender = talent.Gender;
+
+            //        existingTalent.Email = talent.Email;
+            //        existingTalent.Phone = talent.Phone;
+            //        existingTalent.MobilePhone = talent.MobilePhone;
+            //        existingTalent.IsMobilePhoneVerified = talent.IsMobilePhoneVerified;
+
+            //        existingTalent.Address = talent.Address;
+            //        existingTalent.Nationality = talent.Nationality;
+            //        existingTalent.VisaStatus = talent.VisaStatus;
+            //        existingTalent.VisaExpiryDate = talent.VisaExpiryDate;
+            //        existingTalent.ProfilePhoto = talent.ProfilePhoto;
+            //        existingTalent.ProfilePhotoUrl = talent.ProfilePhotoUrl;
+
+            //        existingTalent.VideoName = talent.VideoName;
+            //        existingTalent.VideoUrl = videoUrl;
+            //        existingTalent.CvName = talent.CvName;
+            //        existingTalent.CvUrl = cvUrl;
+
+            //        existingTalent.Summary = talent.Summary;
+            //        existingTalent.Description = talent.Description;
+            //        existingTalent.LinkedAccounts = talent.LinkedAccounts;
+            //        existingTalent.JobSeekingStatus = talent.JobSeekingStatus;
+
+            //        var newSkills = new List<UserSkill>();
+            //        foreach (var item in talent.Skills)
+            //        {
+            //            var skill = existingTalent.Skills.SingleOrDefault(x => x.Id == item.Id);
+            //            if (null == skill)
+            //            {
+            //                skill = new UserSkill
+            //                {
+            //                    Id = ObjectId.GenerateNewId().ToString(),
+            //                    IsDeleted = false
+            //                };
+            //            }
+            //            UpdateSkillFromView(item, skill);
+            //            newSkills.Add(skill);
+            //        }
+            //        existingTalent.Skills = newSkills;
+            //    }
+            //}
             throw new NotImplementedException();
         }
 
@@ -319,6 +417,22 @@ namespace Talent.Services.Profile.Domain.Services
             original.Skill = model.Name;
         }
 
+        protected void UpdateLanguageFromView(AddLanguageViewModel model, UserLanguage original)
+        {
+            original.Language = model.Name;
+            original.LanguageLevel = model.Level;
+            original.UserId = model.CurrentUserId;
+        }
+
+        protected void UpdateEducationFromView(AddEducationViewModel model, UserEducation original)
+        {
+            original.Country = model.Country;
+            original.InstituteName = model.InstituteName;
+            original.Title = model.Title;
+            original.Degree = model.Degree;
+            original.YearOfGraduation = model.YearOfGraduation;
+        }
+
         #endregion
 
         #region Build Views from Model
@@ -330,6 +444,55 @@ namespace Talent.Services.Profile.Domain.Services
                 Id = skill.Id,
                 Level = skill.ExperienceLevel,
                 Name = skill.Skill
+            };
+        }
+
+        protected AddLanguageViewModel ViewModelFromLanguage(UserLanguage language)
+        {
+            return new AddLanguageViewModel
+            {
+                Name = language.Language,
+                Id = language.Id,
+                Level = language.LanguageLevel,
+                CurrentUserId = language.UserId,
+            };
+        }
+
+        protected AddEducationViewModel ViewModelFromEducation(UserEducation education)
+        {
+            return new AddEducationViewModel
+            {
+                Country = education.Country,
+                InstituteName = education.InstituteName,
+                Title = education.Title,
+                Degree = education.Degree,
+                YearOfGraduation = education.YearOfGraduation,
+                Id = education.Id
+            };
+        }
+
+        protected AddCertificationViewModel ViewModelFromCertification(
+            UserCertification certification)
+        {
+            return new AddCertificationViewModel
+            {
+                Id = certification.Id,
+                CertificationName = certification.CertificationName,
+                CertificationFrom = certification.CertificationFrom,
+                CertificationYear = certification.CertificationYear
+            };
+        }
+
+        protected ExperienceViewModel ViewModelFromExperience(UserExperience experience)
+        {
+            return new ExperienceViewModel
+            {
+                Id = experience.Id,
+                Company = experience.Company,
+                Position = experience.Position,
+                Responsibilities = experience.Responsibilities,
+                Start = experience.Start,
+                End = experience.End
             };
         }
 
@@ -350,7 +513,7 @@ namespace Talent.Services.Profile.Domain.Services
             //Your code here;
             throw new NotImplementedException();
         }
-         
+
         public async Task<int> GetTotalTalentsForClient(string clientId, string recruiterId)
         {
             //Your code here;

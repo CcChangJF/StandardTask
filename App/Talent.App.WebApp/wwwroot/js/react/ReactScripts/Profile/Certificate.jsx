@@ -12,6 +12,7 @@ export default class Certificate extends React.Component {
 
     render() {
 
+       return (<p>skill</p>);
     }
 }
 
