@@ -8,12 +8,13 @@ export default class SelfIntroduction extends React.Component {
     
     };
 
-    
-
-
 
     render() {
-       return (<p>skill</p>);
+        return (
+            <div className="ui sixteen wide column">
+                <label>This is self-introduction.</label>
+            </div>
+        );
        
     }
 }

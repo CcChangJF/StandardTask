@@ -88,6 +88,7 @@ namespace Talent.Services.Profile
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStaticFiles();
             app.UseCors("AllowWebAppAccess");
             app.UseMvc();
         }

@@ -17,7 +17,7 @@ namespace Talent.Common.Services
         private readonly string _tempFolder;
         private IAwsService _awsService;
 
-        public FileService(IHostingEnvironment environment, 
+        public FileService(IHostingEnvironment environment,
             IAwsService awsService)
         {
             _environment = environment;
@@ -27,20 +27,52 @@ namespace Talent.Common.Services
 
         public async Task<string> GetFileURL(string id, FileType type)
         {
-            //Your code here;
-            throw new NotImplementedException();
+            var basePath = "http://localhost:60290";
+            return Path.Combine(basePath, _tempFolder, id).Replace('\\', '/');
+        }
+
+        private async Task<string> savePhoto(IFormFile file)
+        {
+            string newFileName = Guid.NewGuid().ToString()
+                + Path.GetExtension(file.FileName);
+            var fullfilePath = Path.Combine(
+                _environment.WebRootPath, _tempFolder, newFileName);
+            using (var stream = new FileStream(fullfilePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+            return newFileName;
         }
 
         public async Task<string> SaveFile(IFormFile file, FileType type)
         {
-            //Your code here;
-            throw new NotImplementedException();
+            string newFileName = "";
+            switch (type)
+            {
+                case FileType.ProfilePhoto:
+                    newFileName = await savePhoto(file);
+                    break;
+                case FileType.UserVideo:
+                    break;
+                case FileType.UserCV:
+                    break;
+            }
+            return newFileName;
         }
 
         public async Task<bool> DeleteFile(string id, FileType type)
         {
-            //Your code here;
-            throw new NotImplementedException();
+            try
+            {
+                var filePath = _tempFolder + id;
+                var fullFilePath = Path.GetFullPath(filePath);
+                File.Delete(fullFilePath);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
 
 
@@ -51,7 +83,7 @@ namespace Talent.Common.Services
             //Your code here;
             throw new NotImplementedException();
         }
-        
+
         private async Task<bool> DeleteFileGeneral(string id, string bucket)
         {
             //Your code here;

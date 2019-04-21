@@ -1461,3 +1461,79 @@ div.ReactTags__selected a.ReactTags__remove {
     margin-bottom: 10px;
 }
 /*Manage jobs - End*/
+
+/*Account Profile*/
+div.rt-tr {
+    align-items: center;
+}
+div.rt-td {
+    align-self: center;
+}
+.ui.selection.dropdown{
+    min-width: 150px;
+}
+
+.language-dropdown{
+    width: 150px;
+}
+
+.ui.basic.button.borderless {
+    box-shadow: none !important;
+}
+
+.ReactTable .rt-td  {
+    overflow: visible !important;
+}
+
+.ReactTable .rt-tbody  {
+    overflow: visible !important;
+}
+
+.ReactTable .rt-table {
+    overflow: visible !important;
+}
+
+.skill-dropdown {
+    width: 150px;
+}
+
+.datepicker-container .react-datepicker-wrapper {
+    display: block;
+}
+
+.datepicker-container .react-datepicker__input-container {
+    display: block;
+}
+
+.ui.grid.experience-edit-grid > .row {
+    padding-bottom: 0;
+}
+
+.action-buttons {
+    padding-bottom: 1rem;
+}
+
+.visa-button-div {
+    display: flex !important;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.ui.grid.talent-status > .row {
+    padding-bottom: 0;
+}
+
+.photo-upload > input {
+    display: none;
+}
+
+.photo-upload {
+    display: flex !important;
+    justify-content: flex-start;
+}
+
+.photo-talent{
+    height: 5em !important;
+    width: 5em !important;
+}
+/*Account Profile - End*/

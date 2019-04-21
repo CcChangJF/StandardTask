@@ -1,24 +1,46 @@
 ﻿import React from 'react';
 import Cookies from 'js-cookie';
+import { Button } from 'semantic-ui-react';
 
 export class Description extends React.Component {
 
     constructor(props) {
         super(props);
+        let desp = props.description ? props.description : "";
+        let sum = props.summary ? props.summary : "";
         this.state = {
+            prevId: -1,
+            description: desp,
+            summary: sum,
             characters: 0
         };
-        this.update = this.update.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.saveUpdate = this.saveUpdate.bind(this);
     };
 
-    update(event) {
-        let data = {};
-        data[event.target.name] = event.target.value;
-        this.props.updateStateData(data);
-        let description = event.target.value;
+    handleChange(event) {
         this.setState({
-            characters: description.length
-        })
+            [event.target.name]: event.target.value,
+        }, function () {
+            this.setState({ characters: this.state.description.length });
+        });
+    }
+
+    componentDidUpdate() {
+        if (-1 == this.state.prevId) {
+            this.setState({
+                prevId: 1,
+                description: this.props.description ? this.props.description : "",
+                summary: this.props.summary ? this.props.summary : ""
+            })
+        }
+    }
+
+    saveUpdate() {
+        let newData = {};
+        newData["description"] = this.state.description;
+        newData["summary"] = this.state.summary;
+        this.props.saveProfile(newData);
     }
 
     render() {
@@ -31,11 +53,20 @@ export class Description extends React.Component {
                     <h3>Description</h3>
                     <div className="tooltip">Write a description of your company.</div>
                 </div>
-                <div className="ten wide column">
+                <div className="ui twelve wide column">
                     <div className="field" >
-                        <textarea maxLength={characterLimit} name="Description" placeholder="Please tell us about any hobbies, additional expertise, or anything else you’d like to add." value={this.props.description} onChange={this.update} ></textarea>
+                        <input name="summary"
+                            value={this.state.summary}
+                            placeholder="Please provide a short summary about your company."
+                            onChange={this.handleChange}></input>
+                        <label>Summary must be no more than 150 characters.</label>
+                        <textarea maxLength={characterLimit} name="description"
+                            placeholder="Please tell us about any hobbies, additional expertise, or anything else you’d like to add."
+                            value={this.state.description}
+                            onChange={this.handleChange} ></textarea>
+                        <p>Characters remaining : {characters} / {characterLimit}</p>
+                        <Button type="button" className="teal right floated" onClick={this.saveUpdate}>Save</Button>
                     </div>
-                    <p>Characters remaining : {characters} / {characterLimit}</p>
                 </div>
             </React.Fragment>
         )

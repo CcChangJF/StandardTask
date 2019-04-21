@@ -191,7 +191,7 @@ export default class EmployeeProfile extends React.Component {
                                             tooltip='Enter your primary contact details'
                                         >
                                             <IndividualDetailSection
-                                                controlFunc={this.updateForComponentId}
+                                                controlFunc={this.updateAndSaveData}
                                                 details={this.state.employerData.primaryContact}
                                                 componentId='primaryContact'
                                             />

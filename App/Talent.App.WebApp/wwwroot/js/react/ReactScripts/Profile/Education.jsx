@@ -10,6 +10,10 @@ export default class Education extends React.Component {
 
     render() {
 
-       return (<p>skill</p>);
+        return (
+            <div className="ui sixteen wide column">
+                <label>Don't have to implement now.</label>
+            </div>
+            );
     }
 }

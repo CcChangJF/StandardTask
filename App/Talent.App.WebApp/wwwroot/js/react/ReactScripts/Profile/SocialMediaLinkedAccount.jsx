@@ -16,7 +16,6 @@ export default class SocialMediaLinkedAccount extends React.Component {
             showEidtSection: false,
             newLinks: details
         };
-        //"linkedIn":"","github":""
 
         this.renderEdit = this.renderEdit.bind(this);
         this.renderDisplay = this.renderDisplay.bind(this);
@@ -29,12 +28,12 @@ export default class SocialMediaLinkedAccount extends React.Component {
     }
 
     componentDidMount() {
-        //$('.ui.button.social-media')
-        //    .popup();
+        $('.ui.button.social-media')
+            .popup();
     }
 
     openEdit() {
-        let details = Object.assign({}, this.props.details);
+        let details = Object.assign({}, this.props.linkedAccounts);
         this.setState({
             showEidtSection: true,
             newLinks: details
@@ -48,9 +47,8 @@ export default class SocialMediaLinkedAccount extends React.Component {
     }
 
     saveProfile() {
-        let data = Object.assign({}, this.state.newLinks);
-        this.props.saveProfileData(data);
-        closeEdit();
+        this.props.controlFunc(this.props.componentId, this.state.newLinks);
+        this.closeEdit();
     }
 
     handleChange(event) {
@@ -59,6 +57,7 @@ export default class SocialMediaLinkedAccount extends React.Component {
         this.setState({
             newLinks: data
         });
+        
     }
 
     handleClick(event) {
@@ -68,7 +67,7 @@ export default class SocialMediaLinkedAccount extends React.Component {
     }
 
     render() {
-        return this.state.showEidtSection ? this.renderEdit() : this.renderDisplay();
+        return (this.state.showEidtSection ? this.renderEdit() : this.renderDisplay());
     }
 
     renderEdit() {

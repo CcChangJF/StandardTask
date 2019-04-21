@@ -8,7 +8,6 @@
     "moment": "^2.22.2",
     "react": "^16.3.2",
     "react-ckeditor-component": "^1.1.0",
-    "react-datepicker": "^1.6.0",
     "react-dom": "^16.3.2",
     "react-player": "^1.5.1",
     "react-router-dom": "^4.2.2"
@@ -23,13 +22,17 @@
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "css-loader": "^2.1.1",
     "fetch": "^1.1.0",
     "js-cookie": "^2.2.0",
     "query-string": "^6.2.0",
     "react": "^16.3.2",
+    "react-datepicker": "^1.8.0",
     "react-dom": "^16.3.2",
+    "react-table": "^6.9.2",
     "react-tag-input": "^5.0.2",
     "semantic-ui-react": "^0.81.3",
+    "style-loader": "^0.23.1",
     "webpack": "^4.5.0",
     "webpack-cli": "^3.2.3"
   }

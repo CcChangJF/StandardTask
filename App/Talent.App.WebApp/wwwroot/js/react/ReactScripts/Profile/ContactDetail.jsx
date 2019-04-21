@@ -2,6 +2,7 @@
 import Cookies from 'js-cookie';
 import { ChildSingleInput } from '../Form/SingleInput.jsx';
 import { Location } from '../Employer/CreateJob/Location.jsx';
+
 export class IndividualDetailSection extends Component {
     constructor(props) {
         super(props)
@@ -53,8 +54,10 @@ export class IndividualDetailSection extends Component {
     saveContact() {
         console.log(this.props.componentId)
         console.log(this.state.newContact)
-        const data = Object.assign({}, this.state.newContact)
-        this.props.controlFunc(this.props.componentId, data)
+        const data = Object.assign({}, this.state.newContact);
+        let newData = Object.assign({}, this.state.newContact);
+        newData[this.props.componentId] = data;
+        this.props.controlFunc(newData)
         this.closeEdit()
     }
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Talent.Services.Profile.Models.Profile
 {
-    public class ExperienceViewModel
+    public class AddExperienceViewModel
     {
         public String Id { get; set; }
         public String Company { get; set; }
