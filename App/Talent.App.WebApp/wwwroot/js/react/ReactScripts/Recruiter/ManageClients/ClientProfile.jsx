@@ -8,6 +8,7 @@ import { IndividualDetailSection, CompanyDetailSection } from '../../Profile/Con
 import Skill from '../../Profile/Skill.jsx';
 import PhotoUpload from '../../Profile/PhotoUpload.jsx';
 import VideoUpload from '../../Profile/VideoUpload.jsx'
+import { profileUrl } from '../../Config.js';
 
 class ClientProfileModal extends React.Component {
     constructor(props) {
@@ -22,8 +23,10 @@ class ClientProfileModal extends React.Component {
     loadData(id) {
         if (id != undefined) {
             var cookies = Cookies.get('talentAuthToken');
+            let link = profileUrl + "/profile/getEmployerProfile?id=" + id + "&role=" + "employer";
             $.ajax({
-                url: 'http://localhost:60290/profile/profile/getEmployerProfile?id=' + id + '&role=' + 'employer',
+                //url: 'http://localhost:60290/profile/profile/getEmployerProfile?id=' + id + '&role=' + 'employer',
+                url: link,
                 headers: {
                     'Authorization': 'Bearer ' + cookies,
                     'Content-Type': 'application/json'
@@ -50,8 +53,10 @@ class ClientProfileModal extends React.Component {
 
     saveData() {
         var cookies = Cookies.get('talentAuthToken');
+        let link = profileUrl + "/profile/saveClientProfile";
         $.ajax({
-            url: 'http://localhost:60290/profile/profile/saveClientProfile',
+            //url: 'http://localhost:60290/profile/profile/saveClientProfile',
+            url: link,
             headers: {
                 'Authorization': 'Bearer ' + cookies,
                 'Content-Type': 'application/json'

@@ -18,6 +18,7 @@ import Experience from './Experience.jsx';
 import { BodyWrapper, loaderData } from '../Layout/BodyWrapper.jsx';
 import { LoggedInNavigation } from '../Layout/LoggedInNavigation.jsx';
 import TalentStatus from './TalentStatus.jsx';
+import { profileUrl } from '../Config.js';
 
 export default class AccountProfile extends React.Component {
     constructor(props) {
@@ -71,8 +72,9 @@ export default class AccountProfile extends React.Component {
 
     loadData() {
         var cookies = Cookies.get('talentAuthToken');
+        let link = profileUrl + "/profile/getTalentProfile";
         $.ajax({
-            url: 'http://localhost:60290/profile/profile/getTalentProfile',
+            url: link,
             headers: {
                 'Authorization': 'Bearer ' + cookies,
                 'Content-Type': 'application/json'
@@ -108,8 +110,9 @@ export default class AccountProfile extends React.Component {
 
     saveProfile() {
         var cookies = Cookies.get('talentAuthToken');
+        let link = profileUrl + "/profile/updateTalentProfile";
         $.ajax({
-            url: 'http://localhost:60290/profile/profile/updateTalentProfile',
+            url: link,
             headers: {
                 'Authorization': 'Bearer ' + cookies,
                 'Content-Type': 'application/json'
@@ -278,7 +281,7 @@ export default class AccountProfile extends React.Component {
                                             <PhotoUpload
                                                 imageId={this.state.profileData.profilePhotoUrl}
                                                 updateProfileData={this.updateWithoutSave}
-                                                savePhotoUrl='http://localhost:60290/profile/profile/updateProfilePhoto'
+                                                savePhotoUrl={profileUrl + '/profile/updateProfilePhoto'}
                                                 componentId={"profilePhotoUrl"}
                                             />
                                         </FormItemWrapper>
@@ -290,7 +293,7 @@ export default class AccountProfile extends React.Component {
                                             <VideoUpload
                                                 videoName={this.state.profileData.videoName}
                                                 updateProfileData={this.updateWithoutSave}
-                                                saveVideoUrl={'http://localhost:60290/profile/profile/updateTalentVideo'}
+                                                saveVideoUrl={profileUrl + '/profile/updateTalentVideo'}
                                             />
                                         </FormItemWrapper>
                                         <FormItemWrapper
@@ -302,7 +305,7 @@ export default class AccountProfile extends React.Component {
                                                 cvName={this.state.profileData.cvName}
                                                 cvUrl={this.state.profileData.cvUrl}
                                                 updateProfileData={this.updateWithoutSave}
-                                                saveCVUrl={'http://localhost:60290/profile/profile/updateTalentCV'}
+                                                saveCVUrl={profileUrl + '/profile/updateTalentCV'}
                                             />
                                         </FormItemWrapper>
                                         <SelfIntroduction

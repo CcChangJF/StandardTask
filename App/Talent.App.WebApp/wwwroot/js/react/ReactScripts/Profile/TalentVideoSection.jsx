@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react'
 import VideoUpload from './VideoUpload.jsx'
+import { profileUrl } from '../Config.js';
 
 export class TalentVideoSection extends Component {
     constructor(props) {
@@ -45,11 +46,13 @@ export class TalentVideoSection extends Component {
     }
 
     render() {
+        let link = profileUrl + "/profile/updateTalentVideo";
         let uploaders = this.props.videos.map(x =>
             <VideoUpload
                 videoName={this.state.profileData.videoName}
                 updateProfileData={this.updateForComponentId}
-                saveVideoUrl={'http://localhost:60290/profile/profile/updateTalentVideo'}
+                //saveVideoUrl={'http://localhost:60290/profile/profile/updateTalentVideo'}
+                saveVideoUrl={link}
             />
         )
         uploaders.push(<VideoUpload videoName='' updateProfileData={this.updateForComponentId} />)

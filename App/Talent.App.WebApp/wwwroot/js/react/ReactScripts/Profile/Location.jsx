@@ -93,7 +93,7 @@ export class Address extends React.Component {
         let countryOptions = Object.keys(Countries).map(
             (x) => ({ key: x, value: x, text: x }));
         let cityOptions = [];
-        if ("" != selectedCountry && null != selectedCountry) {
+        if (selectedCountry) {
             cityOptions = Countries[selectedCountry].map(
                 (x) => ({ key: x, value: x, text: x }));
         }

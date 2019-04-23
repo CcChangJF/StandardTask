@@ -2,6 +2,7 @@
 import Cookies from 'js-cookie';
 import { Popup } from 'semantic-ui-react';
 import moment from 'moment';
+import { listUrl } from '../../Config';
 
 export class JobSummaryCard extends React.Component {
     constructor(props) {
@@ -11,8 +12,10 @@ export class JobSummaryCard extends React.Component {
 
     selectJob(id) {
         var cookies = Cookies.get('talentAuthToken');
+        let link = listUrl + "/listing/closeJob";
         $.ajax({
-            url: 'http://localhost:51689/listing/listing/closeJob',
+            //url: 'http://localhost:51689/listing/listing/closeJob',
+            url: link,
             headers: {
                 'Authorization': 'Bearer ' + cookies,
                 'Content-Type': 'application/json'

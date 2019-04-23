@@ -8,7 +8,7 @@ import Cookies from 'js-cookie'
 import PropTypes from 'prop-types'
 import LoggedInBanner from './LoggedInBanner.jsx'
 import { GeneralModal } from '../GeneralModal.jsx'
-
+import { profileUrl } from '../../Config.js';
 
 export default class AuthenticatingBanner extends React.Component {
     constructor(props) {
@@ -59,8 +59,9 @@ export default class AuthenticatingBanner extends React.Component {
 
     isUserAuthenticated() {
         var cookies = Cookies.get('talentAuthToken')
+        let link = profileUrl + "/profile/isUserAuthenticated";
         $.ajax({
-            url: 'http://localhost:60290/profile/profile/isUserAuthenticated',
+            url: link,
             headers: {
                 'Authorization': 'Bearer ' + cookies,
                 'Content-Type': 'application/json'

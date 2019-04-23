@@ -7,6 +7,7 @@ import { IndividualDetailSection } from '../Profile/ContactDetail.jsx';
 import FormItemWrapper from '../Form/FormItemWrapper.jsx';
 import NotificationSetting from './NotificationSetting.jsx';
 import AccountSetting from './AccountSetting.jsx';
+import { identityUrl } from '../Config.js';
 
 export default class UserAccountSetting extends React.Component {
     constructor(props) {
@@ -51,8 +52,10 @@ export default class UserAccountSetting extends React.Component {
     save(e, field) {
         const cookies = Cookies.get('talentAuthToken');
         if (field == "name") {            
+            let link = identityUrl + "/authentication/changeUserName?userName=" + this.state.userName;
             $.ajax({
-                url: 'http://localhost:60998/authentication/authentication/changeUserName?userName=' + this.state.userName,
+                //url: 'http://localhost:60998/authentication/authentication/changeUserName?userName=' + this.state.userName,
+                url: link,
                 type: 'POST',
                 headers: {
                     'Authorization': 'Bearer ' + cookies,
@@ -73,8 +76,10 @@ export default class UserAccountSetting extends React.Component {
         }
         if (field == "password") {
             let data = this.state.password;
+            let link = identityUrl + "/authentication/changePassword";
             $.ajax({
-                url: 'http://localhost:60998/authentication/authentication/changePassword',
+                //url: 'http://localhost:60998/authentication/authentication/changePassword',
+                url: link,
                 type: "POST",
                 data: JSON.stringify(data),
                 headers: {
@@ -103,8 +108,10 @@ export default class UserAccountSetting extends React.Component {
             });
         }
         if (field == "deactivate") {
+            let link = identityUrl + "/authentication/deactivateAccount";
             $.ajax({
-                url: 'http://localhost:60998/authentication/authentication/deactivateAccount',
+                //url: 'http://localhost:60998/authentication/authentication/deactivateAccount',
+                url: link,
                 type: "POST",
                 headers: {
                     'Authorization': 'Bearer ' + cookies,
@@ -124,8 +131,10 @@ export default class UserAccountSetting extends React.Component {
     }
     getUserRole() {
         const cookies = Cookies.get('talentAuthToken');
+        let link = identityUrl + "/authentication/getAccountSettingInfo";
         $.ajax({
-            url: 'http://localhost:60998/authentication/authentication/getAccountSettingInfo',
+            //url: 'http://localhost:60998/authentication/authentication/getAccountSettingInfo',
+            url: link,
             type: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + cookies,

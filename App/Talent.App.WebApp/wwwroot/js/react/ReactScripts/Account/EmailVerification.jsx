@@ -5,6 +5,7 @@ import { CheckBox } from '../Form/CheckBox.jsx'
 import { userNavigation } from './UserNavigation.jsx'
 import { FormErrors } from '../Form/FormErrors.jsx'
 import Cookies from 'js-cookie'
+import { identityUrl } from '../Config.js';
 
 export class EmailVerification extends React.Component {
     constructor(props) {
@@ -67,8 +68,10 @@ export class EmailVerification extends React.Component {
     };
     verifyEmail() {
         this.setState({ isLoading: true });
+        let link = identityUrl + "/authentication/resendVerificationLink";
         $.ajax({
-            url: 'http://localhost:60998/authentication/authentication/resendVerificationLink',
+            //url: 'http://localhost:60998/authentication/authentication/resendVerificationLink',
+            url: link,
             type: 'POST',
             data: JSON.stringify(this.state.email),
             contentType: 'application/json',

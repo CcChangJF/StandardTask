@@ -6,6 +6,7 @@ import { LoggedInNavigation } from '../../Layout/LoggedInNavigation.jsx';
 import { JobSummaryCard } from './JobSummaryCard.jsx';
 import { BodyWrapper, loaderData } from '../../Layout/BodyWrapper.jsx';
 import { Pagination, Icon, Dropdown, Checkbox, Accordion, Form, Segment } from 'semantic-ui-react';
+import { listUrl } from '../../Config.js';
 
 export default class ManageJob extends React.Component {
     constructor(props) {
@@ -52,7 +53,8 @@ export default class ManageJob extends React.Component {
     };
 
     loadData(callback) {
-        var link = 'http://localhost:51689/listing/listing/getSortedEmployerJobs';
+        //var link = 'http://localhost:51689/listing/listing/getSortedEmployerJobs';
+        var link = listUrl + '/listing/getSortedEmployerJobs';
         var cookies = Cookies.get('talentAuthToken');
         $.ajax({
             url: link,

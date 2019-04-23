@@ -3,6 +3,7 @@ import { SingleInput } from '../Form/SingleInput.jsx'
 import { Select } from '../Form/Select.jsx'
 import { CheckBox } from '../Form/CheckBox.jsx'
 import { FormErrors } from '../Form/FormErrors.jsx'
+import { identityUrl } from '../Config.js';
 
 export default class ForgotPassword extends React.Component {
     constructor(props) {
@@ -30,9 +31,10 @@ export default class ForgotPassword extends React.Component {
     forgotPassword() {
         this.setState({ isLoading: true });
         var forgotPasswordModel = { email: this.state.email };
-
+        let link = identityUrl + "/authentication/forgetpassword";
         $.ajax({
-            url: 'http://localhost:60998/authentication/authentication/forgetpassword',
+            //url: 'http://localhost:60998/authentication/authentication/forgetpassword',
+            url: link,
             type: 'POST',
             data: JSON.stringify(forgotPasswordModel),
             contentType: 'application/json',

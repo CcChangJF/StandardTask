@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import Cookies from 'js-cookie';
+import { profileUrl } from '../Config';
 export class Images extends React.Component {
 
     constructor(props) {
@@ -27,9 +28,10 @@ export class Images extends React.Component {
     loadImages(Id) {
 
         var cookies = Cookies.get('talentAuthToken');
-
+        let link = profileUrl + "/profile/getEmployerProfileImage/?id=" + Id;
         $.ajax({
-            url: 'http://localhost:60290/profile/profile/getEmployerProfileImage/?id=' + Id,
+            //url: 'http://localhost:60290/profile/profile/getEmployerProfileImage/?id=' + Id,
+            url: link,
             headers: {
                 'Authorization': 'Bearer ' + cookies,
                 'Content-Type': 'application/json'
@@ -45,7 +47,9 @@ export class Images extends React.Component {
 
                 if (res.employerProfile.length > 0) {
                     for (var i = 0; i < res.employerProfile.length; i++) {
-                        imageSrcArr.push("http://localhost:60290/profile/profile/getEmployerProfileImages/?Id=" + res.employerProfile[i].fileName);
+                        let link = profileUrl + "/profile/getEmployerProfileImages/?Id=" + res.employerProfile[i].fileName;
+                        //imageSrcArr.push("http://localhost:60290/profile/profile/getEmployerProfileImages/?Id=" + res.employerProfile[i].fileName);
+                        imageSrcArr.push(link);
                         imageIdArr.push(res.employerProfile[i].id);
                         selectedFileArr.push("");
                     }
@@ -135,9 +139,10 @@ export class Images extends React.Component {
         data.append('FileRemoveId', this.state.selectedRemoveFileId);
 
         var cookies = Cookies.get('talentAuthToken');
-
+        let link = profileUrl + "/profile/addEmployerProfileImages";
         $.ajax({
-            url: 'http://localhost:60290/profile/profile/addEmployerProfileImages',
+            //url: 'http://localhost:60290/profile/profile/addEmployerProfileImages',
+            url: link,
             headers: {
                 'Authorization': 'Bearer ' + cookies
             },
