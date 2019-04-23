@@ -12,3 +12,11 @@
 
 # Ignore personal files
 **/*.user
+
+# Ignore publish files
+*.[Pp]ublish.xml
+*.azurePubxml
+*.pubxml
+*.publishproj
+
+.gitignore

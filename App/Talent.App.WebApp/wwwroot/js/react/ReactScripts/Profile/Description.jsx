@@ -3,7 +3,6 @@ import Cookies from 'js-cookie';
 import { Button } from 'semantic-ui-react';
 
 export class Description extends React.Component {
-
     constructor(props) {
         super(props);
         let desp = props.description ? props.description : "";

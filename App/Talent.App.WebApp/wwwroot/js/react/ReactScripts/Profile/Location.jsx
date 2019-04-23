@@ -53,19 +53,20 @@ export class Address extends React.Component {
     handleChange(event) {
         let data = Object.assign({}, this.state.newAddr);
         data[event.target.name] = event.target.value;
-        if ("country" == [event.target.name]) {
-            if (event.target.value != this.state.newAddr.country) {
-                data["city"] = "";
-                this.setState({
-                    newAddr: data
-                }, this.render);
-            }
-        }
-        else {
-            this.setState({
-                newAddr: data
-            });
-        }
+        this.setState({ newAddr: data });
+        //if ("country" === [event.target.name]) {
+        //    if (event.target.value != this.state.newAddr.country) {
+        //        data.city = "";
+        //        this.setState({
+        //            newAddr: data
+        //        });
+        //    }
+        //}
+        //else {
+        //    this.setState({
+        //        newAddr: data
+        //    });
+        //}
     }
 
     handleDropdownChange(name, value) {

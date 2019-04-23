@@ -27,7 +27,8 @@ namespace Talent.Common.Services
 
         public async Task<string> GetFileURL(string id, FileType type)
         {
-            var basePath = "http://localhost:60290";
+            //var basePath = "http://localhost:60290";
+            var basePath = "https://standardtask.azurewebsites.net/profile";
             return Path.Combine(basePath, _tempFolder, id).Replace('\\', '/');
         }
 

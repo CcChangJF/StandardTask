@@ -127,7 +127,7 @@ export default class TalentCardDetail extends React.Component {
                                 : <div className="ui grid ">
                                     <div className="row">
                                         <div className="column">
-                                            <Embed url="http://localhost:60290/videos/demo.mp4" />
+                                            <Embed url="https://standardtask.azurewebsites.net/profile/videos/demo.mp4" />
                                         </div>
                                     </div>
                                 </div>
