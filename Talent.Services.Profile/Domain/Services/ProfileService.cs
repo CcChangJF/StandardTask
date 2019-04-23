@@ -529,8 +529,49 @@ namespace Talent.Services.Profile.Domain.Services
 
         public async Task<IEnumerable<TalentSuggestionViewModel>> GetFullTalentList()
         {
-            //Your code here;
-            throw new NotImplementedException();
+            var talents = (await _userRepository.Get(x => true)).ToList();
+            List<TalentSuggestionViewModel> result =
+                new List<TalentSuggestionViewModel>();
+            foreach (var talent in talents)
+            {
+                TalentSuggestionViewModel t = await ViewModelFromTalent(talent);
+                result.Add(t);
+            }
+            return result;
+        }
+
+        public async Task<TalentSuggestionViewModel> ViewModelFromTalent(User talent)
+        {
+            var experiences = talent.Experience.OrderByDescending(x => x.End)
+                .Select(x => ViewModelFromExperience(x)).ToList();
+            var skills = talent.Skills.Select(
+                x => ViewModelFromSkill(x)).ToList();
+            var cvUrl = string.IsNullOrWhiteSpace(talent.CvName)
+                    ? ""
+                    : await _fileService.GetFileURL(talent.CvName, FileType.UserCV);
+
+            return new TalentSuggestionViewModel
+            {
+                Id = talent.Id,
+                Name = talent.FirstName + " " + talent.LastName,
+                City = talent.Address.City,
+                Country = talent.Address.Country,
+                PhotoId = talent.ProfilePhotoUrl,
+                Summary = talent.Summary,
+                Position = "",
+                WorkExperience = experiences,
+                Skills = skills,
+                VisaStatus = talent.VisaStatus,
+                VisaExpiryDate = talent.VisaExpiryDate,
+                CvUrl = cvUrl,
+                LinkedAccounts = talent.LinkedAccounts,
+            };
+        }
+
+        public async Task<IEnumerable<Task<TalentSuggestionViewModel>>> GetRecommendTalents()
+        {
+            return (await _userRepository.Get(x => true)).ToList()
+                .Select(async (x) => (await ViewModelFromTalent(x)));
         }
 
         public IEnumerable<TalentMatchingEmployerViewModel> GetEmployerList()

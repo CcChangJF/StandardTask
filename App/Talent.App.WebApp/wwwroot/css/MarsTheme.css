@@ -1537,3 +1537,40 @@ div.rt-td {
     width: 5em !important;
 }
 /*Account Profile - End*/
+
+/* Talent Feed*/
+.talent-info-bar .icon {
+    cursor: pointer;
+}
+
+div.thick {
+    font-weight: bold;
+}
+
+.talent-profile-item {
+    padding-bottom: 10px;
+}
+
+.follow-suggestion-card {
+    min-width: 210px;
+}
+
+.profile {
+    margin-bottom: 5%;
+}
+
+.default-value {
+    font-weight: lighter;
+    color: #bfbfbf;
+    font-style: italic;
+}
+
+.talent-cards{
+    overflow: auto;
+    max-height: 720px;
+    padding-top: 1px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+}
+/* Talent Feed - End*/

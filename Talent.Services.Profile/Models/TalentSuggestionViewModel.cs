@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Talent.Common.Models;
+using Talent.Services.Profile.Models.Profile;
 
 namespace Talent.Services.Profile.Models
 {
@@ -15,8 +16,8 @@ namespace Talent.Services.Profile.Models
         public string PhotoId { get; set; }
         public string Summary { get; set; }
         public string Position { get; set; }
-        public List<String> WorkExperience { get; set; }
-        public List<String> Skills { get; set; }
+        public List<AddExperienceViewModel> WorkExperience { get; set; }
+        public List<AddSkillViewModel> Skills { get; set; }
         public string VisaStatus { get; set; }
         public DateTime? VisaExpiryDate { get; set; }
         public string Education { get; set; }
