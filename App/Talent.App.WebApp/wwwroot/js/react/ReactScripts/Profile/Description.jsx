@@ -31,7 +31,8 @@ export class Description extends React.Component {
             this.setState({
                 prevId: 1,
                 description: this.props.description ? this.props.description : "",
-                summary: this.props.summary ? this.props.summary : ""
+                summary: this.props.summary ? this.props.summary : "",
+                characters: this.props.description ? this.props.description.length : 0
             })
         }
     }
@@ -45,8 +46,6 @@ export class Description extends React.Component {
 
     render() {
         const characterLimit = 600;
-        let characters = this.props.description ? this.props.description.length : 0;
-        
         return (
             <React.Fragment>
                 <div className="four wide column">
@@ -64,7 +63,7 @@ export class Description extends React.Component {
                             placeholder="Please tell us about any hobbies, additional expertise, or anything else you’d like to add."
                             value={this.state.description}
                             onChange={this.handleChange} ></textarea>
-                        <p>Characters remaining : {characters} / {characterLimit}</p>
+                        <p>Characters remaining : {this.state.characters} / {characterLimit}</p>
                         <Button type="button" className="teal right floated" onClick={this.saveUpdate}>Save</Button>
                     </div>
                 </div>

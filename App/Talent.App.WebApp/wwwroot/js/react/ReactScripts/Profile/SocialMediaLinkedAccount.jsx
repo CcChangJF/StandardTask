@@ -62,7 +62,7 @@ export default class SocialMediaLinkedAccount extends React.Component {
 
     handleClick(event) {
         let type = [event.target.name];
-        let link = this.state.newLinks[type];
+        let link = this.props.linkedAccounts[type];
         alert("go to " + type + ": " + link);
     }
 
@@ -103,12 +103,12 @@ export default class SocialMediaLinkedAccount extends React.Component {
             <div className="row">
                 <div className="ui sixteen wide column">
                     <React.Fragment>
-                        <Button color="linkedin" name="linkedIn"
+                        <Button type="button" color="linkedin" name="linkedIn"
                             className="left floated"
                             onClick={this.handleClick}>
                             <Icon name="linkedin"></Icon>LinkedIn
                         </Button>
-                        <Button name="gitHub"
+                        <Button type="button" name="github"
                             className="black left floated"
                             onClick={this.handleClick}>
                             <Icon name="github"></Icon>GitHub

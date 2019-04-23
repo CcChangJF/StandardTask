@@ -47,7 +47,7 @@ export default class VisaStatus extends React.Component {
                 isInitialed: true,
                 visaStatus: this.props.visaStatus,
                 visaExpiryDate: this.props.visaExpiryDate
-                    ? moment(this.props.showExpireDate) : moment()
+                    ? moment(this.props.visaExpiryDate) : moment()
             });
         }
     }
